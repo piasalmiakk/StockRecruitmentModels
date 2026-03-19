@@ -24,3 +24,5 @@ Imports:
     purrr,
     rvest,
     stringr
+URL: https://github.com/piasalmiakk/StockRecruitmentModels
+BugReports: https://github.com/piasalmiakk/StockRecruitmentModels/issues
