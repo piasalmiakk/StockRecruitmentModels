@@ -5,7 +5,7 @@ usethis::use_data(nea_cod_2025, overwrite = TRUE)
 
 import_species_data <- function(file_path, species_name) {
   df_list <- read_html(file_path) |>
-    html_table() |>
+    html_table()
 
   df <- df_list[[1]]
 
@@ -45,6 +45,5 @@ merge_species_df <- function(file_path_list, species_names_list) {
 
 }
 
-test2 <- merge_species_df(all_files, all_species)
+combined_dataset <- merge_species_df(all_files, all_species)
 
-## make a function that imports ALL datasets and then combines with with bindrows
