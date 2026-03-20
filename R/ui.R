@@ -3,7 +3,7 @@ ui <- page_sidebar(
   selectInput(inputId = "species", label = "Species",
               choices = c("NEA Cod","NEA Haddock")),
   selectInput(inputId = "model", label = "Model",
-              choices = c("Beverton & Holt","Ricker")),
+              choices = c("Beverton & Holt","Ricker","Hockey Stick")),
   sliderInput(inputId = "year_range", label = "Year range",
               min = 1, max = 100, value = 10)
   #include slider for a and b

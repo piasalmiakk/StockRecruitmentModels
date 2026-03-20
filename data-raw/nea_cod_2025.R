@@ -4,6 +4,7 @@ usethis::use_data(nea_cod_2025, overwrite = TRUE)
 
 ## FUNCTION ##
 # imports individual stock assessment html files and cleans them
+
 import_species_data <- function(file_path, species_name) {
   df_list <- read_html(file_path) |>
     html_table() # reads the html file and turns it into a list of dataset tables

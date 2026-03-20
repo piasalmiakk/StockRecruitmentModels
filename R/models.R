@@ -1,23 +1,130 @@
-bev_holt <- nls(Recruitment~a*SSB/(1+SSB/Bhalf),data=test1,start=list(a=1,Bhalf=1e7),
-                control = nls.control(maxiter = 1000))
+
 # @import bslib, nav_panel, eller bslib::
 
-bev_holt_log <- -nls(log(Recruitment)~log(a*SSB/(1+SSB/Bhalf)),data=test1,start=coef(mBH),lower=c(0.1,1),algorithm="port")
+## - BEVERTON & HOLT - ##
+###  MODEL  ###
+bh_model <- function(data, a_start = NULL, b_start = NULL) {
 
-bev_holt1 <- srStarts(Recruitment ~ SSB, data = test1)
-fit1 <- nls(log(Recruitment)~log(bev_holt1(SSB, a, b)), data = test1, start = bev_holt1)
+  scale_factor <- max(data$SSB, na.rm = TRUE)
+
+  data <- data |>
+    mutate(SSB = SSB / scale_factor)
+
+  # setting good starting parameters if not given
+  if (is.null(a_start)) {
+    a_start = max(data$Recruitment, na.rm = TRUE)/max(data$SSB, na.rm = TRUE)
+  }
+
+  if (is.null(b_start)) {
+    b_start <- mean(data$SSB, na.rm = TRUE)
+  }
 
 
-## make these as functions?
+  # fitting nls
+  nlsLM(
+    Recruitment ~ a * SSB / (1 + SSB / b),
+    data = data,
+    start = list(
+      a = a_start,
+      b = b_start
+    ),
+    lower = c(1e-6, 1e-6),
+    control = nls.lm.control(maxiter = 500)
+  )
+}
 
-bh_model <- function(a,b,data) {
-  #includes the starting parameters?
-  SSB <- data |>
-    select(SSB)
-  Recruitment <- data |>
-    select(Recruitment)
+test4 <- bh_model1(test1,NULL,NULL)
 
-  nls(Recruitment~a*SSB/(1+SSB/b),data=d,start=list(a=a,b=b))
+###  PREDICTION ###
+predict_bh <- function(model, data) {
+
+  scale_factor <- max(data$SSB, na.rm = TRUE)
+
+  newdata <- data.frame(
+    SSB = seq(min(data$SSB), max(data$SSB), length.out = 100)
+  )
+
+  newdata$SSB_scaled <- newdata$SSB / scale_factor
+
+  newdata$Recruitment_pred <- predict(
+    model,
+    newdata = data.frame(SSB = newdata$SSB_scaled)
+  )
+
+  return(newdata)
 }
 
 # ui <- bslib: blahba
+
+## - RICKER - ##
+###  MODEL  ###
+
+ricker_model <- function(data, a_start = NULL, b_start = NULL){
+
+  # setting good starting parameters if not given
+  if (is.null(a_start)) {
+    a_start = max(data$Recruitment / data$SSB, na.rm = TRUE)
+  }
+
+  if (is.null(b_start)) {
+    b_start <- 1- mean(data$SSB, na.rm = TRUE)
+  }
+
+  # fitting nls
+  nlsLM(
+    Recruitment ~ a * SSB * exp(-b * SSB),
+    data = data,
+    start = list(a = a_start, b = b_start),
+    lower = c(1e-6, 1e-6),
+    control = nls.lm.control(maxiter = 500)
+  )
+}
+
+###  PREDICTIONS ###
+
+predict_ricker <- function(model,data){
+
+  newdata <- tibble(
+    SSB = seq(min(data$SSB), max(data$SSB),
+              length.out = 100)
+  )
+
+  newdata$Recruitment_pred <- predict(model, newdata = newdata)
+
+  return(newdata)
+}
+## - HOCKEY STICK - ##
+###  MODEL  ###
+
+hockey_model <- function(data, a_start = NULL, b_start = NULL){
+
+  # setting good starting parameters if not given
+  if (is.null(a_start)) {
+    a_start = max(data$Recruitment / data$SSB, na.rm = TRUE)
+  }
+
+  if (is.null(b_start)) {
+    b_start <- median(data$SSB, na.rm = TRUE)
+  }
+
+  # fitting nls
+  nlsLM(
+    Recruitment ~ ifelse(SSB < b, a * SSB, a * b),
+    data = data,
+    start = list(a = a_start, b = b_start),
+    lower = c(1e-6, 1e-6),
+    control = nls.lm.control(maxiter = 500)
+  )
+}
+
+### PREDICTION ###
+predict_hockey <- function(model, data){
+
+  newdata <- tibble(
+    SSB = seq(min(data$SSB), max(data$SSB), length.out = 100)
+  )
+
+  newdata$Recruitment_pred <- predict(model, newdata = newdata)
+
+  return(newdata)
+}
