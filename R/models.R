@@ -1,8 +1,29 @@
 
-# @import bslib, nav_panel, eller bslib::
+#' @importFrom dplyr tibble mutate
+#' @importFrom minpack.lm nlsLM
+
+
 
 ## - BEVERTON & HOLT - ##
 ###  MODEL  ###
+#' Beverton & Holt model.
+#' @description Fits a Beverton & Holt model using nls.
+#' @param data Takes in the dataset
+#' @param a_start Lets user choose a starting value for a
+#' @param b_start Lets user choose a starting value for b
+#' @examples
+#' data <- tibble(
+#' SSB = c(1000,2000,3000,4000,5000),
+#' Recruitment = c(1500,2500,3500,4500,5500))
+#'
+#' fit <- bh_model(data)
+#' coef(fit)
+#'
+#' pred <- predict_bh(fit,data)
+#' head(pred)
+#' @return returns a nlsLM model
+#' @export
+
 bh_model <- function(data, a_start = NULL, b_start = NULL) {
 
   scale_factor <- max(data$SSB, na.rm = TRUE)
@@ -33,9 +54,28 @@ bh_model <- function(data, a_start = NULL, b_start = NULL) {
   )
 }
 
-test4 <- bh_model1(test1,NULL,NULL)
 
 ###  PREDICTION ###
+#' Beverton & Holt prediction.
+#' @description Predicts new data to plot the Beverton & Holt model.
+#' @param model Takes in the Ricker model
+#' @param data Takes in the dataset
+#' @examples
+#' data <- tibble(
+#' SSB = c(1000,2000,3000,4000,5000),
+#' Recruitment = c(1500,2500,3500,4500,5500))
+#'
+#' fit <- bh_model(data)
+#' coef(fit)
+#'
+#' pred <- predict_bh(fit,data)
+#' head(pred)
+#' @param model,data
+#' model takes in the Beverton & Holt model
+#' data takes in the dataset
+#' @return returns a predicted dataset
+#' @export
+
 predict_bh <- function(model, data) {
 
   scale_factor <- max(data$SSB, na.rm = TRUE)
@@ -54,10 +94,27 @@ predict_bh <- function(model, data) {
   return(newdata)
 }
 
-# ui <- bslib: blahba
 
 ## - RICKER - ##
 ###  MODEL  ###
+
+#' Ricker model.
+#' @param data Takes in the dataset
+#' @param a_start Lets user choose a starting value for a
+#' @param b_start Lets user choose a starting value for b
+#' @description Fits a Ricker model using nls
+#' @examples
+#' data <- tibble(
+#' SSB = c(1000,2000,3000,4000,5000),
+#' Recruitment = c(1500,2500,3500,4500,5500))
+#'
+#' fit <- ricker_model(data)
+#' coef(fit)
+#'
+#' pred <- predict_ricker(fit,data)
+#' head(pred)
+#' @return returns a nlsLM model
+#' @export
 
 ricker_model <- function(data, a_start = NULL, b_start = NULL){
 
@@ -82,6 +139,23 @@ ricker_model <- function(data, a_start = NULL, b_start = NULL){
 
 ###  PREDICTIONS ###
 
+#' Ricker prediction.
+#' @description Predicts new data to plot the Ricker model.
+#' @param model Takes in the Ricker model
+#' @param data Takes in the dataset
+#' @examples
+#' data <- tibble(
+#' SSB = c(1000,2000,3000,4000,5000),
+#' Recruitment = c(1500,2500,3500,4500,5500))
+#'
+#' fit <- ricker_model(data)
+#' coef(fit)
+#'
+#' pred <- predict_ricker(fit,data)
+#' head(pred)
+#' @return returns a predicted dataset
+#' @export
+
 predict_ricker <- function(model,data){
 
   newdata <- tibble(
@@ -95,6 +169,23 @@ predict_ricker <- function(model,data){
 }
 ## - HOCKEY STICK - ##
 ###  MODEL  ###
+#' Hockey Stick model.
+#' @description Fits a Hockey Stick model using nls.
+#' @param data Takes in the dataset
+#' @param a_start Lets user choose a starting value for a
+#' @param b_start Lets user choose a starting value for b
+#' @examples
+#' data <- tibble(
+#' SSB = c(1000,2000,3000,4000,5000),
+#' Recruitment = c(1500,2500,3500,4500,5500))
+#'
+#' fit <- hockey_model(data)
+#' coef(fit)
+#'
+#' pred <- predict_hockey(fit,data)
+#' head(pred)
+#' @return returns a nlsLM model
+#' @export
 
 hockey_model <- function(data, a_start = NULL, b_start = NULL){
 
@@ -118,6 +209,24 @@ hockey_model <- function(data, a_start = NULL, b_start = NULL){
 }
 
 ### PREDICTION ###
+
+#' Hockey Stick prediction.
+#' #' @description Predicts new data to plot the Hockey Stick model.
+#' @param model Takes in the Hockey Stick model
+#' @param data Takes in the dataset
+#' @examples
+#' data <- tibble(
+#' SSB = c(1000,2000,3000,4000,5000),
+#' Recruitment = c(1500,2500,3500,4500,5500))
+#'
+#' fit <- hockey_model(data)
+#' coef(fit)
+#'
+#' pred <- predict_hockey(fit,data)
+#' head(pred)
+#' @return returns a predicted dataset
+#' @export
+
 predict_hockey <- function(model, data){
 
   newdata <- tibble(
