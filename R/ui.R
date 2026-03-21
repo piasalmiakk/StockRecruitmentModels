@@ -1,11 +1,21 @@
+species_map <- c("NEA Cod" = "nea_cod",
+                 "NEA Haddock" = "nea_haddock")
+
+#' @import bslib
+#' @import shiny
+
+
 ui <- page_sidebar(
   title = "Stock Recruitment Models",
+  sidebar = sidebar(
   selectInput(inputId = "species", label = "Species",
-              choices = c("NEA Cod","NEA Haddock")),
+              choices = species_map),
   selectInput(inputId = "model", label = "Model",
               choices = c("Beverton & Holt","Ricker","Hockey Stick")),
   sliderInput(inputId = "year_range", label = "Year range",
-              min = 1, max = 100, value = 10)
-  #include slider for a and b
-  card(plotOutput("stockrecruitment_plot"))
+              min = 1950, max = 2025, value = c(1990,2025)),
+    withMathJax(),
+         uiOutput("model_equation"),
+         uiOutput("model_description")),
+  plotOutput("stockrecruitment_plot")
 )
