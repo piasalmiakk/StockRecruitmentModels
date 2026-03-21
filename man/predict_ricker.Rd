@@ -7,8 +7,9 @@
 predict_ricker(model, data)
 }
 \arguments{
-\item{model, data}{model takes in the Ricker model
-data takes in the dataset}
+\item{model}{Takes in the Ricker model}
+
+\item{data}{Takes in the dataset}
 }
 \value{
 returns a predicted dataset

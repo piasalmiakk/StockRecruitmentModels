@@ -7,9 +7,11 @@
 hockey_model(data, a_start = NULL, b_start = NULL)
 }
 \arguments{
-\item{data, a_start, b_start}{data takes in the dataset
-a_start lets user choose a starting value for a
-b_start lets user choose a starting value for b}
+\item{data}{Takes in the dataset}
+
+\item{a_start}{Lets user choose a starting value for a}
+
+\item{b_start}{Lets user choose a starting value for b}
 }
 \value{
 returns a nlsLM model

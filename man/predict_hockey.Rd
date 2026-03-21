@@ -3,22 +3,21 @@
 \name{predict_hockey}
 \alias{predict_hockey}
 \title{Hockey Stick prediction.
-#' @description
-Predicts new data to plot the Hockey Stick model.}
+#' @description Predicts new data to plot the Hockey Stick model.}
 \usage{
 predict_hockey(model, data)
 }
 \arguments{
-\item{model, data}{model takes in the Hockey stick
-data takes in the dataset}
+\item{model}{Takes in the Hockey Stick model}
+
+\item{data}{Takes in the dataset}
 }
 \value{
 returns a predicted dataset
 }
 \description{
 Hockey Stick prediction.
-#' @description
-Predicts new data to plot the Hockey Stick model.
+#' @description Predicts new data to plot the Hockey Stick model.
 }
 \examples{
 data <- tibble(

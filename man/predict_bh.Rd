@@ -7,6 +7,10 @@
 predict_bh(model, data)
 }
 \arguments{
+\item{model}{Takes in the Ricker model}
+
+\item{data}{Takes in the dataset}
+
 \item{model, data}{model takes in the Beverton & Holt model
 data takes in the dataset}
 }

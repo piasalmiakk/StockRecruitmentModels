@@ -2,17 +2,18 @@
 % Please edit documentation in R/importing_cleaning_merging_data.R
 \name{merge_species_df}
 \alias{merge_species_df}
-\title{Merges already cleaned datasets}
+\title{Import and merge stock assessment datasets}
 \usage{
 merge_species_df(file_path_list, species_names_list)
 }
 \arguments{
-\item{file_path, species_name}{file_path takes in one file path of an html file
-species_name takes a species name completely chosen by user (string)}
+\item{file_path_list}{Takes in a list of file paths}
+
+\item{species_names_list}{Takes in a list of species names in order of file list}
 }
 \value{
-returns a cleaned html file
+returns a merged dataset
 }
 \description{
-Merges already cleaned datasets
+Takes files and runs them through import_species_data and then merges them
 }
