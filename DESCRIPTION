@@ -21,9 +21,13 @@ Config/testthat/edition: 3
 Depends: 
     R (>= 3.5)
 Imports: 
+    bslib,
     dplyr,
+    minpack.lm,
     purrr,
     rvest,
+    shiny,
     stringr
 URL: https://github.com/piasalmiakk/StockRecruitmentModels
 BugReports: https://github.com/piasalmiakk/StockRecruitmentModels/issues
+RoxygenNote: 7.3.3
