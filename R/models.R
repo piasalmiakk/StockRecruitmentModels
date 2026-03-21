@@ -6,7 +6,7 @@
 
 ## - BEVERTON & HOLT - ##
 ###  MODEL  ###
-#' Beverton & Holt model.
+#' @title Beverton & Holt model.
 #' @description Fits a Beverton & Holt model using nls.
 #' @param data Takes in the dataset
 #' @param a_start Lets user choose a starting value for a

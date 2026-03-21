@@ -5,7 +5,7 @@
 ## import_species_data ##
 ### FUNCTION ###
 
-#' Import stock assessment html file
+#' @title Import stock assessment html file
 #' @description Imports and cleans a stock assessment html file
 #' @param file_path Takes in file path of an html file
 #' @param species_name Takes a species name chosen by user (string)
