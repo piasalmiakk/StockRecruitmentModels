@@ -5,6 +5,7 @@
 \alias{combined_dataset}
 \title{Combined Stock-Recruitment dataset}
 \format{
+## "combined_dataset"
 A data frame with columns:
 \describe{
   \item{SSB}{Spawning stock biomass}

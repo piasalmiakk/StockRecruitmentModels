@@ -3,7 +3,8 @@
 #' A dataset containing SSB and Recruitment time series data for different
 #' species of Norwegian fish stock.
 #'
-#' @format A data frame with columns:
+#' @format ## "combined_dataset"
+#' A data frame with columns:
 #' \describe{
 #'   \item{SSB}{Spawning stock biomass}
 #'   \item{Recruitment}{Number of recruits}

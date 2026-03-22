@@ -5,14 +5,12 @@
 
 
 globalVariables(c(
-  "Recruitment", "species","Year","Recruitment_pred"
+  "combined_dataset","Recruitment", "species","Year","Recruitment_pred"
 ))
 
 
 server <- function(input, output) {
 
-  combined_dataset <- readRDS(system.file("extdata", "combined_dataset.rds",
-                                          package = "StockRecruitmentModels"))
 
   # -----  FITTING MODEL ON PLOT ----- #
 
