@@ -4,7 +4,7 @@
 #' species of Norwegian fish stock.
 #'
 #' @format A data frame with columns:
-#' SSB, Recruitment, Year, species, SSB_low, SSB_high, Recruitment_low, Recruitment_high
-#'
+#' SSB, Recruitment, Year, species, Low_SSB, High_SSB, High_R, Low_R
+#' @usage data(combined_dataset)
 #' @source Generated from stockassessment.org HTML files
 "combined_dataset"

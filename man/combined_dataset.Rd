@@ -6,13 +6,13 @@
 \title{Combined Stock-Recruitment dataset}
 \format{
 A data frame with columns:
-SSB, Recruitment, Year, species, SSB_low, SSB_high, Recruitment_low, Recruitment_high
+SSB, Recruitment, Year, species, Low_SSB, High_SSB, High_R, Low_R
 }
 \source{
 Generated from stockassessment.org HTML files
 }
 \usage{
-combined_dataset
+data(combined_dataset)
 }
 \description{
 A dataset containing SSB and Recruitment time series data for different
