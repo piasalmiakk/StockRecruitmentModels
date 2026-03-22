@@ -5,16 +5,17 @@
 
 
 globalVariables(c(
-  "combined_dataset","Recruitment", "species","Year","Recruitment_pred"
+  "Recruitment", "species","Year","Recruitment_pred"
 ))
-
 
 
 server <- function(input, output) {
 
+  combined_dataset <- readRDS(system.file("extdata", "combined_dataset.rds",
+                                          package = "StockRecruitmentModels"))
+
   # -----  FITTING MODEL ON PLOT ----- #
 
- combined_dataset <- StockRecruitmentModels::combined_dataset
   model_fit <- reactive({ # putting the inputs in a reactive so it can be used in several outputs
 
   req(input$species) #require input to avoid NULL
