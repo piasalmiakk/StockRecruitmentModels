@@ -1,7 +1,7 @@
 #' @import shiny
 #' @import ggplot2
 
-utils::globalVariables(c("combined_dataset"))
+combined_dataset <- StockRecruitmentModels::combined_dataset
 
 server <- function(input, output) {
 
@@ -9,10 +9,11 @@ server <- function(input, output) {
 
   model_fit <- reactive({ # putting the inputs in a reactive so it can be used in several outputs
 
+  req(input$species) #require input to avoid NULL
     chosen_species <- combined_dataset |>
-      filter(combined_dataset$species == input$species, # choosing species
-             combined_dataset$Year >= input$year_range[1], # lower year range
-             combined_dataset$Year <= input$year_range[2]) # upper year range
+      dplyr::filter(species == input$species, # choosing species
+             Year >= input$year_range[1], # lower year range
+             Year <= input$year_range[2]) # upper year range
 
     # setting a and b starting values to NULL so the model will compute this each time
     a <- NULL
@@ -53,25 +54,24 @@ server <- function(input, output) {
   output$stockrecruitment_plot <- renderPlot({
 
     fit <- model_fit() # fetching the fit from earlier
-    fit$chosen_species
 
     # putting these in ifs to make sure they only run if fit isn't NULL
-    if (!is.null(fit)) {
+    if (is.null(fit)) return (NULL)
     plot_stockrecruit <- ggplot(fit$chosen_species, aes(
-      x = fit$SSB,
-      y = fit$Recruitment,
-      colour = fit$species)) +
+      x = SSB,
+      y = Recruitment,
+      colour = species)) +
       geom_point() +
       labs(title = "Stock-Recruitment relationship",
            colour = "Species"
-           )}
+           )
 
 
         if (!is.null(fit)) {
           plot_stockrecruit +
             geom_line(
             data = fit$pred,
-            aes(fit$SSB, fit$Recruitment_pred),
+            aes(SSB, Recruitment_pred),
             colour = "blue",
             linewidth = 1
           )
@@ -98,7 +98,7 @@ server <- function(input, output) {
   fitted <- NULL #setting fitted to NULL so inputs from UI can be selected
 
   if (!is.null(fit) && !is.null(fit$chosen_model)) {
-    params <- fit$coef(fit$chosen_model)
+    params <- coef(fit$chosen_model)
     a_hat <- round(params["a"], 3) # fetching a and b parameters
     b_hat <- round(params["b"], 3)
 
