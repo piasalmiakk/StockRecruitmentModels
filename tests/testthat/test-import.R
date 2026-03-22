@@ -3,7 +3,7 @@ test_that("import works", {
   file_path <- system.file(
     "extdata",
     "nea_cod_2025.html",
-    package = "StockAssessmentModels"
+    package = "StockRecruitmentModels"
   )
 
   imported_data <- import_species_data(file_path,"nea_cod")
