@@ -18,9 +18,6 @@
 #'
 #' fit <- bh_model(data)
 #' coef(fit)
-#'
-#' pred <- predict_bh(fit,data)
-#' head(pred)
 #' @return returns a nlsLM model
 #' @export
 

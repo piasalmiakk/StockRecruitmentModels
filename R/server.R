@@ -1,6 +1,8 @@
 #' @import shiny
 #' @import ggplot2
 
+utils::globalVariables(c("combined_dataset"))
+
 server <- function(input, output) {
 
   # -----  FITTING MODEL ON PLOT ----- #
@@ -56,9 +58,9 @@ server <- function(input, output) {
     # putting these in ifs to make sure they only run if fit isn't NULL
     if (!is.null(fit)) {
     plot_stockrecruit <- ggplot(fit$chosen_species, aes(
-      x = .fit$SSB,
-      y = .fit$Recruitment,
-      colour = .fit$species)) +
+      x = fit$SSB,
+      y = fit$Recruitment,
+      colour = fit$species)) +
       geom_point() +
       labs(title = "Stock-Recruitment relationship",
            colour = "Species"
@@ -68,8 +70,8 @@ server <- function(input, output) {
         if (!is.null(fit)) {
           plot_stockrecruit +
             geom_line(
-            data = .fit$pred,
-            aes(.fit$SSB, .fit$Recruitment_pred),
+            data = fit$pred,
+            aes(fit$SSB, fit$Recruitment_pred),
             colour = "blue",
             linewidth = 1
           )
@@ -96,7 +98,7 @@ server <- function(input, output) {
   fitted <- NULL #setting fitted to NULL so inputs from UI can be selected
 
   if (!is.null(fit) && !is.null(fit$chosen_model)) {
-    params <- .fit$coef(.fit$chosen_model)
+    params <- .fit$coef(fit$chosen_model)
     a_hat <- round(params["a"], 3) # fetching a and b parameters
     b_hat <- round(params["b"], 3)
 
