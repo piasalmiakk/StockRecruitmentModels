@@ -41,9 +41,9 @@ import_species_data <- function(file_path, species_name) {
 
   # lagging recruitment by 3 years, since the spawns from SSB year 1 will be recruits by year of recruitment
   df <- df |>
-    mutate(Recruitment = lag(.data$Recruitment, recruitment_age),
-           Low_R = lag(.data$Low_R, recruitment_age),
-           High_R = lag(.data$High_R, recruitment_age),
+    mutate(Recruitment = dplyr::lag(.data$Recruitment, recruitment_age),
+           Low_R = dplyr::lag(.data$Low_R, recruitment_age),
+           High_R = dplyr::lag(.data$High_R, recruitment_age),
            across(c(.data$Recruitment, .data$Low_R, .data$High_R,
                     .data$SSB, .data$Low_SSB, .data$High_SSB)
                   ,as.numeric))  |> # making all cols numeric
@@ -65,8 +65,10 @@ utils::globalVariables(c("all_files", "all_species"))
 #' @export
 merge_species_df <- function(file_path_list, species_names_list) {
 
+  # using map to iterate all the files and species in the lists into the function
   all_data <- map2(all_files, all_species, ~ import_species_data(.x, .y))
 
+  # binding together all to make a complete dataframe
   combined_df <- bind_rows(all_data)
 
 }

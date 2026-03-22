@@ -3,6 +3,8 @@
 
 server <- function(input, output) {
 
+  # -----  FITTING MODEL ON PLOT ----- #
+
   model_fit <- reactive({ # putting the inputs in a reactive so it can be used in several outputs
 
     chosen_species <- combined_dataset |>
@@ -15,6 +17,7 @@ server <- function(input, output) {
     b <- NULL
 
     # model fit using if else based on user input to choose models
+    # using tryCatch in case something goes wrong
     fit <- tryCatch({
       if (input$model == "Beverton & Holt") {
 
@@ -47,9 +50,10 @@ server <- function(input, output) {
     # making the plot
   output$stockrecruitment_plot <- renderPlot({
 
-    fit <- model_fit()
+    fit <- model_fit() # fetching the fit from earlier
     fit$chosen_species
 
+    # putting these in ifs to make sure they only run if fit isn't NULL
     if (!is.null(fit)) {
     plot_stockrecruit <- ggplot(fit$chosen_species, aes(
       x = .fit$SSB,
@@ -73,22 +77,30 @@ server <- function(input, output) {
         } else {plot_stockrecruit}
 
   })
+
+  # -----  MODEL EQUATIONS ----- #
+
   output$model_equation <- renderUI({
 
     fit <- model_fit()
+
+    # using switch based on which model user chose
   equation <- switch(input$model,
     "Beverton & Holt" = "$$R = \\frac{a S}{1 + S/b}$$",
     "Ricker" = "$$R = a S e^{-b S}$$",
     "Hockey Stick" = "$$R = \\begin{cases} aS & S < b \\\\ ab & S \\ge b \\end{cases}$$"
   )
 
-  fitted <- NULL
+  # -----  MODEL EQUATIONS WITH FITTED COEFFICIENTS ----- #
+
+  fitted <- NULL #setting fitted to NULL so inputs from UI can be selected
 
   if (!is.null(fit) && !is.null(fit$chosen_model)) {
     params <- .fit$coef(fit$chosen_model)
-    a_hat <- round(params["a"], 3)
+    a_hat <- round(params["a"], 3) # fetching a and b parameters
     b_hat <- round(params["b"], 3)
 
+    # using sprintf to return both text and variables as string
     fitted <- switch(input$model,
       "Beverton & Holt" = sprintf("$$R = \\frac{%.3f S}{1 + S/%.3f}$$",
                                   a_hat, b_hat),
@@ -101,11 +113,16 @@ server <- function(input, output) {
     )
   }
 
+  # mathjax formats equations nicely, hence them looking weird above
   withMathJax(HTML(paste0(
     "<b>Model:</b><br>", equation,
     "<br><br><b>Fitted:</b><br>", fitted
   )))
 })
+
+  # -----  MODEL EQUATION PARAMETERS ----- #
+
+  # changing parameter text based on which model is chosen
   output$model_description <- renderUI({
     text <- switch(input$model,
 

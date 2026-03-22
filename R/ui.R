@@ -1,8 +1,9 @@
-species_map <- c("NEA Cod" = "nea_cod",
-                 "NEA Haddock" = "nea_haddock")
-
 #' @import bslib
 #' @import shiny
+
+# species map to key together shown species choices and inputID
+species_map <- c("NEA Cod" = "nea_cod",
+                 "NEA Haddock" = "nea_haddock")
 
 
 ui <- page_sidebar(
@@ -14,7 +15,7 @@ ui <- page_sidebar(
               choices = c("Beverton & Holt","Ricker","Hockey Stick")),
   sliderInput(inputId = "year_range", label = "Year range",
               min = 1950, max = 2025, value = c(1990,2025)),
-    withMathJax(),
+    withMathJax(), # mathjax for proper formatting of equations
          uiOutput("model_equation"),
          uiOutput("model_description")),
   plotOutput("stockrecruitment_plot")

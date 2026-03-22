@@ -26,12 +26,13 @@
 
 bh_model <- function(data, a_start = NULL, b_start = NULL) {
 
+  # scaling predictor SSB
   scale_factor <- max(data$SSB, na.rm = TRUE)
 
   data <- data |>
     mutate(SSB = SSB / scale_factor)
 
-  # setting good starting parameters if not given
+  # setting standard good starting parameters
   if (is.null(a_start)) {
     a_start = max(data$Recruitment, na.rm = TRUE)/max(data$SSB, na.rm = TRUE)
   }
@@ -75,17 +76,17 @@ bh_model <- function(data, a_start = NULL, b_start = NULL) {
 
 predict_bh <- function(model, data) {
 
-  scale_factor <- max(data$SSB, na.rm = TRUE)
-
-  newdata <- data.frame(
+  # making a new dataframe to predict from
+  newdata <- tibble(
     SSB = seq(min(data$SSB), max(data$SSB), length.out = 100)
   )
 
   newdata$SSB_scaled <- newdata$SSB / scale_factor
 
+  # predicting data
   newdata$Recruitment_pred <- predict(
     model,
-    newdata = data.frame(SSB = newdata$SSB_scaled)
+    newdata = tibble(SSB = newdata$SSB_scaled)
   )
 
   return(newdata)
