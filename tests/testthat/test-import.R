@@ -6,6 +6,9 @@ test_that("import works", {
     package = "StockRecruitmentModels"
   )
 
+  expect_true(file.exists(file_path)) #testing that file actually exists in extdata
+
+
   imported_data <- import_species_data(file_path,"nea_cod")
 
   expect_true(!is.na(imported_data)) #testing if removal of NAs worked
