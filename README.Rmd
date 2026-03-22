@@ -1,0 +1,47 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# StockRecruitmentModels
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+This package is a shiny app wrapper meant to try out different **Stock-Recruitment models** on real fishery stock data acquired from **stockassessment.org**!
+
+The three models are: 
+**Beverton & Holt**
+**Ricker**
+**Hockey Stick**
+
+
+
+## Installation
+
+You can install the development version of StockRecruitmentModels from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("pak")
+pak::pak("piasalmiakk/StockRecruitmentModels")
+```
+
+## Launching Shiny App
+
+The shiny app can be launched by running:
+
+```{r example}
+StockRecruitmentModels::run_StockRecruitmentModels()
+```
+
+22.03.2026
