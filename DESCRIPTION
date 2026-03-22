@@ -23,11 +23,14 @@ Depends:
 Imports: 
     bslib,
     dplyr,
+    ggplot2,
     minpack.lm,
     purrr,
     rvest,
     shiny,
-    stringr
+    stats,
+    stringr,
+    utils
 URL: https://github.com/piasalmiakk/StockRecruitmentModels
 BugReports: https://github.com/piasalmiakk/StockRecruitmentModels/issues
 RoxygenNote: 7.3.3

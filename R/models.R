@@ -1,7 +1,7 @@
 
 #' @importFrom dplyr tibble mutate
-#' @importFrom minpack.lm nlsLM
-
+#' @importFrom minpack.lm nlsLM nls.lm.control
+#' @import stats
 
 
 ## - BEVERTON & HOLT - ##
@@ -70,9 +70,6 @@ bh_model <- function(data, a_start = NULL, b_start = NULL) {
 #'
 #' pred <- predict_bh(fit,data)
 #' head(pred)
-#' @param model,data
-#' model takes in the Beverton & Holt model
-#' data takes in the dataset
 #' @return returns a predicted dataset
 #' @export
 

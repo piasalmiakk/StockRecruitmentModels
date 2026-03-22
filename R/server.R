@@ -1,13 +1,14 @@
 #' @import shiny
+#' @import ggplot2
 
 server <- function(input, output) {
 
   model_fit <- reactive({ # putting the inputs in a reactive so it can be used in several outputs
 
     chosen_species <- combined_dataset |>
-      filter(species == input$species, # choosing species
-             Year >= input$year_range[1], # lower year range
-             Year <= input$year_range[2]) # upper year range
+      filter(.combined_dataset$species == input$species, # choosing species
+             .combined_dataset$Year >= input$year_range[1], # lower year range
+             .combined_dataset$Year <= input$year_range[2]) # upper year range
 
     # setting a and b starting values to NULL so the model will compute this each time
     a <- NULL
@@ -51,9 +52,9 @@ server <- function(input, output) {
 
     if (!is.null(fit)) {
     plot_stockrecruit <- ggplot(fit$chosen_species, aes(
-      x = SSB,
-      y = Recruitment,
-      colour = species)) +
+      x = .fit$SSB,
+      y = .fit$Recruitment,
+      colour = .fit$species)) +
       geom_point() +
       labs(title = "Stock-Recruitment relationship",
            colour = "Species"
@@ -64,7 +65,7 @@ server <- function(input, output) {
           plot_stockrecruit +
             geom_line(
             data = fit$pred,
-            aes(SSB, Recruitment_pred),
+            aes(.fit$SSB, .fit$Recruitment_pred),
             colour = "blue",
             linewidth = 1
           )
@@ -84,7 +85,7 @@ server <- function(input, output) {
   fitted <- NULL
 
   if (!is.null(fit) && !is.null(fit$chosen_model)) {
-    params <- coef(fit$chosen_model)
+    params <- .fit$coef(fit$chosen_model)
     a_hat <- round(params["a"], 3)
     b_hat <- round(params["b"], 3)
 

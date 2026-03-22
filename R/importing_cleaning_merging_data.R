@@ -1,6 +1,7 @@
-#' @importFrom dplyr select mutate bind_rows lag
+#' @importFrom dplyr select mutate bind_rows lag across
 #' @import rvest
 #' @importFrom purrr map2
+#' @importFrom utils globalVariables
 
 ## import_species_data ##
 ### FUNCTION ###
@@ -40,17 +41,18 @@ import_species_data <- function(file_path, species_name) {
 
   # lagging recruitment by 3 years, since the spawns from SSB year 1 will be recruits by year of recruitment
   df <- df |>
-    mutate(Recruitment = lag(Recruitment, recruitment_age),
-           Low_R = lag(Low_R, recruitment_age),
-           High_R = lag(High_R, recruitment_age),
-           across(c(Recruitment, Low_R, High_R, SSB, Low_SSB, High_SSB)
+    mutate(Recruitment = lag(.data$Recruitment, recruitment_age),
+           Low_R = lag(.data$Low_R, recruitment_age),
+           High_R = lag(.data$High_R, recruitment_age),
+           across(c(.data$Recruitment, .data$Low_R, .data$High_R,
+                    .data$SSB, .data$Low_SSB, .data$High_SSB)
                   ,as.numeric))  |> # making all cols numeric
     na.exclude() # removing NAs
 
   return(df)
 }
 
-
+utils::globalVariables(c("all_files", "all_species"))
 
 ## merge_species_df ##
 ### FUNCTION ###

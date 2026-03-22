@@ -10,9 +10,6 @@ predict_bh(model, data)
 \item{model}{Takes in the Ricker model}
 
 \item{data}{Takes in the dataset}
-
-\item{model, data}{model takes in the Beverton & Holt model
-data takes in the dataset}
 }
 \value{
 returns a predicted dataset
