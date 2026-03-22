@@ -1,7 +1,7 @@
 #' @import shiny
 #' @import ggplot2
 #' @importFrom utils globalVariables
-#' @import rlang .data
+#' @importFrom rlang .data
 
 
 globalVariables(c(
