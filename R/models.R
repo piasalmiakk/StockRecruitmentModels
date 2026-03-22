@@ -209,7 +209,7 @@ hockey_model <- function(data, a_start = NULL, b_start = NULL){
   scale_factor <- max(data$SSB, na.rm = TRUE)
 
   data <- data |>
-    mutate(SSB = .data$SSB / scale_factor)
+    mutate(SSB = data$SSB / scale_factor)
 
 
   # setting good starting parameters if not given
