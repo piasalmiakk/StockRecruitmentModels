@@ -15,6 +15,11 @@
 
 
 import_species_data <- function(file_path, species_name) {
+
+  if (file_path == "" || !file.exists(file_path)) {
+    stop("File not found. Check path or inst/extdata setup.")
+  } # foolproofing that the file actually exists
+
   df_list <- read_html(file_path) |>
     html_table() # reads the html file and turns it into a list of dataset tables
 
