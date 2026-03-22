@@ -1,6 +1,16 @@
-#' combined_dataset
+#' Combined Stock-Recruitment dataset
 #'
-#' A dataset containing SSB and Recruitment timeseries data for different
-#' species of Norwegian fish stock
+#' A dataset containing SSB and Recruitment time series data for different
+#' species of Norwegian fish stock.
 #'
-#' @format description
+#' @format A data frame with columns:
+#' \describe{
+#'   \item{Year}{Year of observation}
+#'   \item{SSB}{Spawning stock biomass}
+#'   \item{Recruitment}{Recruitment values}
+#'   \item{species}{Species name}
+#' }
+#'
+#' @source Generated from stockassessment.org HTML files
+#' @export
+"combined_dataset"
