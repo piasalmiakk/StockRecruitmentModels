@@ -4,12 +4,7 @@
 #' species of Norwegian fish stock.
 #'
 #' @format A data frame with columns:
-#' \describe{
-#'   \item{Year}{Year of observation}
-#'   \item{SSB}{Spawning stock biomass}
-#'   \item{Recruitment}{Recruitment values}
-#'   \item{species}{Species name}
-#' }
+#' SSB, Recruitment, Year, species, SSB_low, SSB_high, Recruitment_low, Recruitment_high
 #'
 #' @source Generated from stockassessment.org HTML files
 "combined_dataset"

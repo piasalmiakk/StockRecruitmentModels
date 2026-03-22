@@ -1,5 +1,12 @@
 #' @import shiny
 #' @import ggplot2
+#' @importFrom utils globalVariables
+
+
+globalVariables(c(
+  "Recruitment", "species","Year","Recruitment_pred"
+))
+
 
 
 server <- function(input, output) {
