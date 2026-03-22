@@ -41,7 +41,7 @@ bh_model <- function(data, a_start = NULL, b_start = NULL) {
 
 
   # fitting nls
-  nlsLM(
+  fit <- nlsLM(
     Recruitment ~ a * SSB / (1 + SSB / b),
     data = data,
     start = list(
@@ -51,6 +51,10 @@ bh_model <- function(data, a_start = NULL, b_start = NULL) {
     lower = c(1e-6, 1e-6),
     control = nls.lm.control(maxiter = 500)
   )
+
+  attr(fit, "scale_factor") <- scale_factor
+
+  return(fit)
 }
 
 
@@ -130,13 +134,17 @@ ricker_model <- function(data, a_start = NULL, b_start = NULL){
   }
 
   # fitting nls
-  nlsLM(
+ fit <-  nlsLM(
     Recruitment ~ a * SSB * exp(-b * SSB),
     data = data,
     start = list(a = a_start, b = b_start),
     lower = c(1e-6, 1e-6),
     control = nls.lm.control(maxiter = 500)
   )
+
+ attr(fit, "scale_factor") <- scale_factor
+
+ return(fit)
 }
 
 ###  PREDICTIONS ###
@@ -214,13 +222,17 @@ hockey_model <- function(data, a_start = NULL, b_start = NULL){
   }
 
   # fitting nls
-  nlsLM(
+  fit <- nlsLM(
     Recruitment ~ ifelse(SSB < b, a * SSB, a * b),
     data = data,
     start = list(a = a_start, b = b_start),
     lower = c(1e-6, 1e-6),
     control = nls.lm.control(maxiter = 500)
   )
+
+  attr(fit, "scale_factor") <- scale_factor
+
+  return(fit)
 }
 
 ### PREDICTION ###

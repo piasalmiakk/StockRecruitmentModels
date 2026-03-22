@@ -3,6 +3,13 @@
 #' @importFrom purrr map2
 #' @importFrom utils globalVariables
 
+
+globalVariables(c(
+  "Recruitment", "Low_R", "High_R",
+  "SSB", "Low_SSB", "High_SSB"
+))
+
+
 ## import_species_data ##
 ### FUNCTION ###
 
@@ -12,11 +19,6 @@
 #' @param species_name Takes a species name chosen by user (string)
 #' @return returns a cleaned html file
 #' @export
-
-globalVariables(c(
-  "Recruitment", "Low_R", "High_R",
-  "SSB", "Low_SSB", "High_SSB"
-))
 
 import_species_data <- function(file_path, species_name) {
 
