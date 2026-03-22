@@ -10,9 +10,9 @@ server <- function(input, output) {
   model_fit <- reactive({ # putting the inputs in a reactive so it can be used in several outputs
 
     chosen_species <- combined_dataset |>
-      filter(.combined_dataset$species == input$species, # choosing species
-             .combined_dataset$Year >= input$year_range[1], # lower year range
-             .combined_dataset$Year <= input$year_range[2]) # upper year range
+      filter(combined_dataset$species == input$species, # choosing species
+             combined_dataset$Year >= input$year_range[1], # lower year range
+             combined_dataset$Year <= input$year_range[2]) # upper year range
 
     # setting a and b starting values to NULL so the model will compute this each time
     a <- NULL
@@ -98,7 +98,7 @@ server <- function(input, output) {
   fitted <- NULL #setting fitted to NULL so inputs from UI can be selected
 
   if (!is.null(fit) && !is.null(fit$chosen_model)) {
-    params <- .fit$coef(fit$chosen_model)
+    params <- fit$coef(fit$chosen_model)
     a_hat <- round(params["a"], 3) # fetching a and b parameters
     b_hat <- round(params["b"], 3)
 
