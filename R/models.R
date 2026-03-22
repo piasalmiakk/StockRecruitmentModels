@@ -76,6 +76,9 @@ bh_model <- function(data, a_start = NULL, b_start = NULL) {
 
 predict_bh <- function(model, data) {
 
+  # importing object_scale factor from model to get the exact same scaling
+  scale_factor <- attr(model, "scale_factor")
+
   # making a new dataframe to predict from
   newdata <- tibble(
     SSB = seq(min(data$SSB), max(data$SSB), length.out = 100)
@@ -115,6 +118,12 @@ predict_bh <- function(model, data) {
 #' @export
 
 ricker_model <- function(data, a_start = NULL, b_start = NULL){
+
+  # scaling predictor SSB
+  scale_factor <- max(data$SSB, na.rm = TRUE)
+
+  data <- data |>
+    mutate(SSB = SSB / scale_factor)
 
   # setting good starting parameters if not given
   if (is.null(a_start)) {
@@ -156,6 +165,9 @@ ricker_model <- function(data, a_start = NULL, b_start = NULL){
 
 predict_ricker <- function(model,data){
 
+  # importing object_scale factor from model to get the exact same scaling
+  scale_factor <- attr(model, "scale_factor")
+
   newdata <- tibble(
     SSB = seq(min(data$SSB), max(data$SSB),
               length.out = 100)
@@ -186,6 +198,13 @@ predict_ricker <- function(model,data){
 #' @export
 
 hockey_model <- function(data, a_start = NULL, b_start = NULL){
+
+  # scaling predictor SSB
+  scale_factor <- max(data$SSB, na.rm = TRUE)
+
+  data <- data |>
+    mutate(SSB = SSB / scale_factor)
+
 
   # setting good starting parameters if not given
   if (is.null(a_start)) {
@@ -226,6 +245,9 @@ hockey_model <- function(data, a_start = NULL, b_start = NULL){
 #' @export
 
 predict_hockey <- function(model, data){
+
+  # importing object_scale factor from model to get the exact same scaling
+  scale_factor <- attr(model, "scale_factor")
 
   newdata <- tibble(
     SSB = seq(min(data$SSB), max(data$SSB), length.out = 100)
