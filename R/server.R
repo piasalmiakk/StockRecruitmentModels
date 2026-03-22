@@ -16,7 +16,7 @@ server <- function(input, output) {
 
   model_fit <- reactive({ # putting the inputs in a reactive so it can be used in several outputs
 
-  req(input$species) #require input to avoid NULL
+  req(input$species, input$model) #require input to avoid NULL
     chosen_species <- combined_dataset |>
       dplyr::filter(species == input$species, # choosing species
              Year >= input$year_range[1], # lower year range

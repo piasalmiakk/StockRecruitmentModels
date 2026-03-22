@@ -11,9 +11,11 @@ ui <- bslib::page_sidebar(
   title = "Stock Recruitment Models",
   sidebar = bslib::sidebar(
   selectInput(inputId = "species", label = "Species",
-              choices = species_map),
+              choices = species_map,
+              selected = species_map[1]),
   selectInput(inputId = "model", label = "Model",
-              choices = c("Beverton & Holt","Ricker","Hockey Stick")),
+              choices = c("Beverton & Holt","Ricker","Hockey Stick"),
+              selected = "Beverton & Holt"),
   sliderInput(inputId = "year_range", label = "Year range",
               min = 1950, max = 2025, value = c(1990,2025)),
     withMathJax(), # mathjax for proper formatting of equations
