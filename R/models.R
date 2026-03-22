@@ -123,7 +123,7 @@ ricker_model <- function(data, a_start = NULL, b_start = NULL){
   scale_factor <- max(data$SSB, na.rm = TRUE)
 
   data <- data |>
-    mutate(SSB = SSB / scale_factor)
+    mutate(SSB = .data$SSB / scale_factor)
 
   # setting good starting parameters if not given
   if (is.null(a_start)) {
@@ -168,14 +168,18 @@ predict_ricker <- function(model,data){
   # importing object_scale factor from model to get the exact same scaling
   scale_factor <- attr(model, "scale_factor")
 
+  # making a new dataframe to predict from
   newdata <- data.frame(
-    SSB = seq(min(data$SSB), max(data$SSB),
-              length.out = 100)
+    SSB = seq(min(data$SSB), max(data$SSB), length.out = 100)
   )
 
   newdata$SSB_scaled <- newdata$SSB / scale_factor
 
-  newdata$Recruitment_pred <- predict(model, newdata = newdata)
+  # predicting data
+  newdata$Recruitment_pred <- predict(
+    model,
+    newdata = data.frame(SSB = newdata$SSB_scaled)
+  )
 
   return(newdata)
 }
@@ -202,19 +206,19 @@ predict_ricker <- function(model,data){
 hockey_model <- function(data, a_start = NULL, b_start = NULL){
 
   # scaling predictor SSB
-  scale_factor <- max(.data$SSB, na.rm = TRUE)
+  scale_factor <- max(data$SSB, na.rm = TRUE)
 
   data <- data |>
-    mutate(SSB = SSB / scale_factor)
+    mutate(SSB = .data$SSB / scale_factor)
 
 
   # setting good starting parameters if not given
   if (is.null(a_start)) {
-    a_start = max(.data$Recruitment / .data$SSB, na.rm = TRUE)
+    a_start = max(data$Recruitment / data$SSB, na.rm = TRUE)
   }
 
   if (is.null(b_start)) {
-    b_start <- median(.data$SSB, na.rm = TRUE)
+    b_start <- median(data$SSB, na.rm = TRUE)
   }
 
   # fitting nls
@@ -251,11 +255,18 @@ predict_hockey <- function(model, data){
   # importing object_scale factor from model to get the exact same scaling
   scale_factor <- attr(model, "scale_factor")
 
-  newdata <- tibble(
+  # making a new dataframe to predict from
+  newdata <- data.frame(
     SSB = seq(min(data$SSB), max(data$SSB), length.out = 100)
   )
 
-  newdata$Recruitment_pred <- predict(model, newdata = newdata)
+  newdata$SSB_scaled <- newdata$SSB / scale_factor
+
+  # predicting data
+  newdata$Recruitment_pred <- predict(
+    model,
+    newdata = data.frame(SSB = newdata$SSB_scaled)
+  )
 
   return(newdata)
 }
