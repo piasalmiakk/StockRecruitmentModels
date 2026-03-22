@@ -14,7 +14,7 @@ server <- function(input, output) {
 
   # -----  FITTING MODEL ON PLOT ----- #
 
-
+ combined_dataset <- StockRecruitmentModels::combined_dataset
   model_fit <- reactive({ # putting the inputs in a reactive so it can be used in several outputs
 
   req(input$species) #require input to avoid NULL
