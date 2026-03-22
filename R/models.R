@@ -18,6 +18,7 @@
 #'
 #' fit <- bh_model(data)
 #' coef(fit)
+#'
 #' @return returns a nlsLM model
 #' @export
 
@@ -108,9 +109,6 @@ predict_bh <- function(model, data) {
 #'
 #' fit <- ricker_model(data)
 #' coef(fit)
-#'
-#' pred <- predict_ricker(fit,data)
-#' head(pred)
 #' @return returns a nlsLM model
 #' @export
 
@@ -194,9 +192,6 @@ predict_ricker <- function(model,data){
 #'
 #' fit <- hockey_model(data)
 #' coef(fit)
-#'
-#' pred <- predict_hockey(fit,data)
-#' head(pred)
 #' @return returns a nlsLM model
 #' @export
 

@@ -26,7 +26,4 @@ Recruitment = c(1500,2500,3500,4500,5500))
 
 fit <- ricker_model(data)
 coef(fit)
-
-pred <- predict_ricker(fit,data)
-head(pred)
 }

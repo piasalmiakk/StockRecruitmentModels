@@ -27,6 +27,4 @@ Recruitment = c(1500,2500,3500,4500,5500))
 fit <- bh_model(data)
 coef(fit)
 
-pred <- predict_bh(fit,data)
-head(pred)
 }
