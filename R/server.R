@@ -1,7 +1,6 @@
 #' @import shiny
 #' @import ggplot2
 
-combined_dataset <- StockRecruitmentModels::combined_dataset
 
 server <- function(input, output) {
 

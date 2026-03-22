@@ -6,9 +6,9 @@ species_map <- c("NEA Cod" = "nea_cod",
                  "NEA Haddock" = "nea_haddock")
 
 
-ui <- page_sidebar(
+ui <- bslib::page_sidebar(
   title = "Stock Recruitment Models",
-  sidebar = sidebar(
+  sidebar = bslib::sidebar(
   selectInput(inputId = "species", label = "Species",
               choices = species_map),
   selectInput(inputId = "model", label = "Model",

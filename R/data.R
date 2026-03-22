@@ -12,5 +12,4 @@
 #' }
 #'
 #' @source Generated from stockassessment.org HTML files
-#' @export
 "combined_dataset"
