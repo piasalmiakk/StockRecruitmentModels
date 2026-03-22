@@ -13,6 +13,10 @@
 #' @return returns a cleaned html file
 #' @export
 
+globalVariables(c(
+  "Recruitment", "Low_R", "High_R",
+  "SSB", "Low_SSB", "High_SSB"
+))
 
 import_species_data <- function(file_path, species_name) {
 

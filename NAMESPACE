@@ -2,7 +2,6 @@
 
 export(bh_model)
 export(hockey_model)
-export(import_species_data)
 export(merge_species_df)
 export(predict_bh)
 export(predict_hockey)
