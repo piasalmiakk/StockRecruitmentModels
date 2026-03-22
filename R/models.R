@@ -12,7 +12,7 @@
 #' @param a_start Lets user choose a starting value for a
 #' @param b_start Lets user choose a starting value for b
 #' @examples
-#' data <- tibble(
+#' data <- data.frame(
 #' SSB = c(1000,2000,3000,4000,5000),
 #' Recruitment = c(1500,2500,3500,4500,5500))
 #'
@@ -30,7 +30,7 @@ bh_model <- function(data, a_start = NULL, b_start = NULL) {
   scale_factor <- max(data$SSB, na.rm = TRUE)
 
   data <- data |>
-    mutate(SSB = SSB / scale_factor)
+    mutate(SSB = .data$SSB / scale_factor)
 
   # setting standard good starting parameters
   if (is.null(a_start)) {
@@ -62,7 +62,7 @@ bh_model <- function(data, a_start = NULL, b_start = NULL) {
 #' @param model Takes in the Ricker model
 #' @param data Takes in the dataset
 #' @examples
-#' data <- tibble(
+#' data <- data.frame(
 #' SSB = c(1000,2000,3000,4000,5000),
 #' Recruitment = c(1500,2500,3500,4500,5500))
 #'
@@ -80,7 +80,7 @@ predict_bh <- function(model, data) {
   scale_factor <- attr(model, "scale_factor")
 
   # making a new dataframe to predict from
-  newdata <- tibble(
+  newdata <- data.frame(
     SSB = seq(min(data$SSB), max(data$SSB), length.out = 100)
   )
 
@@ -89,7 +89,7 @@ predict_bh <- function(model, data) {
   # predicting data
   newdata$Recruitment_pred <- predict(
     model,
-    newdata = tibble(SSB = newdata$SSB_scaled)
+    newdata = data.frame(SSB = newdata$SSB_scaled)
   )
 
   return(newdata)
@@ -105,7 +105,7 @@ predict_bh <- function(model, data) {
 #' @param b_start Lets user choose a starting value for b
 #' @description Fits a Ricker model using nls
 #' @examples
-#' data <- tibble(
+#' data <- data.frame(
 #' SSB = c(1000,2000,3000,4000,5000),
 #' Recruitment = c(1500,2500,3500,4500,5500))
 #'
@@ -151,7 +151,7 @@ ricker_model <- function(data, a_start = NULL, b_start = NULL){
 #' @param model Takes in the Ricker model
 #' @param data Takes in the dataset
 #' @examples
-#' data <- tibble(
+#' data <- data.frame(
 #' SSB = c(1000,2000,3000,4000,5000),
 #' Recruitment = c(1500,2500,3500,4500,5500))
 #'
@@ -168,10 +168,12 @@ predict_ricker <- function(model,data){
   # importing object_scale factor from model to get the exact same scaling
   scale_factor <- attr(model, "scale_factor")
 
-  newdata <- tibble(
+  newdata <- data.frame(
     SSB = seq(min(data$SSB), max(data$SSB),
               length.out = 100)
   )
+
+  newdata$SSB_scaled <- newdata$SSB / scale_factor
 
   newdata$Recruitment_pred <- predict(model, newdata = newdata)
 
@@ -185,7 +187,7 @@ predict_ricker <- function(model,data){
 #' @param a_start Lets user choose a starting value for a
 #' @param b_start Lets user choose a starting value for b
 #' @examples
-#' data <- tibble(
+#' data <- data.frame(
 #' SSB = c(1000,2000,3000,4000,5000),
 #' Recruitment = c(1500,2500,3500,4500,5500))
 #'
@@ -200,7 +202,7 @@ predict_ricker <- function(model,data){
 hockey_model <- function(data, a_start = NULL, b_start = NULL){
 
   # scaling predictor SSB
-  scale_factor <- max(data$SSB, na.rm = TRUE)
+  scale_factor <- max(.data$SSB, na.rm = TRUE)
 
   data <- data |>
     mutate(SSB = SSB / scale_factor)
@@ -208,11 +210,11 @@ hockey_model <- function(data, a_start = NULL, b_start = NULL){
 
   # setting good starting parameters if not given
   if (is.null(a_start)) {
-    a_start = max(data$Recruitment / data$SSB, na.rm = TRUE)
+    a_start = max(.data$Recruitment / .data$SSB, na.rm = TRUE)
   }
 
   if (is.null(b_start)) {
-    b_start <- median(data$SSB, na.rm = TRUE)
+    b_start <- median(.data$SSB, na.rm = TRUE)
   }
 
   # fitting nls
@@ -232,7 +234,7 @@ hockey_model <- function(data, a_start = NULL, b_start = NULL){
 #' @param model Takes in the Hockey Stick model
 #' @param data Takes in the dataset
 #' @examples
-#' data <- tibble(
+#' data <- data.frame(
 #' SSB = c(1000,2000,3000,4000,5000),
 #' Recruitment = c(1500,2500,3500,4500,5500))
 #'

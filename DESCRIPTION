@@ -29,7 +29,6 @@ Imports:
     rvest,
     shiny,
     stats,
-    stringr,
     utils
 URL: https://github.com/piasalmiakk/StockRecruitmentModels
 BugReports: https://github.com/piasalmiakk/StockRecruitmentModels/issues

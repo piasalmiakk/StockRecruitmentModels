@@ -20,7 +20,7 @@ returns a nlsLM model
 Fits a Beverton & Holt model using nls.
 }
 \examples{
-data <- tibble(
+data <- data.frame(
 SSB = c(1000,2000,3000,4000,5000),
 Recruitment = c(1500,2500,3500,4500,5500))
 

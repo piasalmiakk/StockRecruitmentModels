@@ -68,7 +68,7 @@ server <- function(input, output) {
         if (!is.null(fit)) {
           plot_stockrecruit +
             geom_line(
-            data = fit$pred,
+            data = .fit$pred,
             aes(.fit$SSB, .fit$Recruitment_pred),
             colour = "blue",
             linewidth = 1
@@ -96,7 +96,7 @@ server <- function(input, output) {
   fitted <- NULL #setting fitted to NULL so inputs from UI can be selected
 
   if (!is.null(fit) && !is.null(fit$chosen_model)) {
-    params <- .fit$coef(fit$chosen_model)
+    params <- .fit$coef(.fit$chosen_model)
     a_hat <- round(params["a"], 3) # fetching a and b parameters
     b_hat <- round(params["b"], 3)
 
