@@ -49,8 +49,8 @@ import_species_data <- function(file_path, species_name) {
     mutate(Recruitment = dplyr::lag(.data$Recruitment, recruitment_age),
            Low_R = dplyr::lag(.data$Low_R, recruitment_age),
            High_R = dplyr::lag(.data$High_R, recruitment_age),
-           across(c(.data$Recruitment, .data$Low_R, .data$High_R,
-                    .data$SSB, .data$Low_SSB, .data$High_SSB)
+           across(c(Recruitment, Low_R, High_R,
+                    SSB, Low_SSB, High_SSB)
                   ,as.numeric))  |> # making all cols numeric
     na.exclude() # removing NAs
 
