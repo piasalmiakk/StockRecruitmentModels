@@ -1,5 +1,6 @@
 #' @import bslib
 #' @import shiny
+#' @import rlang .data
 
 # species map to key together shown species choices and inputID
 species_map <- c("NEA Cod" = "nea_cod",

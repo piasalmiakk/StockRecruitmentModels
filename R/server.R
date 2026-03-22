@@ -1,6 +1,7 @@
 #' @import shiny
 #' @import ggplot2
 #' @importFrom utils globalVariables
+#' @import rlang .data
 
 
 globalVariables(c(
@@ -12,6 +13,7 @@ globalVariables(c(
 server <- function(input, output) {
 
   # -----  FITTING MODEL ON PLOT ----- #
+
 
   model_fit <- reactive({ # putting the inputs in a reactive so it can be used in several outputs
 
