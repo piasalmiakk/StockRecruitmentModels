@@ -1,11 +1,11 @@
 #' @import shiny
 #' @import ggplot2
-#' @importFrom utils globalVariables
+#' @importFrom utils globalVariables data
 #' @importFrom rlang .data
 
 
 globalVariables(c(
-  "combined_dataset","Recruitment", "species","Year","Recruitment_pred"
+  "data","combined_dataset","Recruitment", "species","Year","Recruitment_pred"
 ))
 
 

@@ -238,7 +238,7 @@ hockey_model <- function(data, a_start = NULL, b_start = NULL){
 ### PREDICTION ###
 
 #' Hockey Stick prediction.
-#' #' @description Predicts new data to plot the Hockey Stick model.
+#' @description Predicts new data to plot the Hockey Stick model.
 #' @param model Takes in the Hockey Stick model
 #' @param data Takes in the dataset
 #' @examples

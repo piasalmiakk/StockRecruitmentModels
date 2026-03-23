@@ -2,8 +2,7 @@
 % Please edit documentation in R/models.R
 \name{predict_hockey}
 \alias{predict_hockey}
-\title{Hockey Stick prediction.
-#' @description Predicts new data to plot the Hockey Stick model.}
+\title{Hockey Stick prediction.}
 \usage{
 predict_hockey(model, data)
 }
@@ -16,8 +15,7 @@ predict_hockey(model, data)
 returns a predicted dataset
 }
 \description{
-Hockey Stick prediction.
-#' @description Predicts new data to plot the Hockey Stick model.
+Predicts new data to plot the Hockey Stick model.
 }
 \examples{
 data <- data.frame(

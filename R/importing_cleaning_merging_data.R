@@ -5,7 +5,7 @@
 
 
 globalVariables(c(
-  "Recruitment", "Low_R", "High_R",
+  "data","Recruitment", "Low_R", "High_R",
   "SSB", "Low_SSB", "High_SSB"
 ))
 
@@ -42,10 +42,10 @@ import_species_data <- function(file_path, species_name) {
   colnames(df)[7] <- "High_SSB"
 
 
+  recruitment_age <- 3 #will change later so it's changeable based on species
+
   df <- df[-c(1:4),] |> # removing the unnecessary top rows
     select(1:7) # choosing only relevant columns
-
-  recruitment_age <- 3  #FIX THIS #extracting recruitment age for the species
 
 
   df$species <- species_name # adding column for species name
@@ -59,6 +59,7 @@ import_species_data <- function(file_path, species_name) {
                     SSB, Low_SSB, High_SSB)
                   ,as.numeric))  |> # making all cols numeric
     na.exclude() # removing NAs
+
 
   return(df)
 }
