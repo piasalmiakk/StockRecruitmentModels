@@ -11,6 +11,7 @@ globalVariables(c(
 
 server <- function(input, output) {
 
+  data("combined_dataset")
 
   # -----  FITTING MODEL ON PLOT ----- #
 
