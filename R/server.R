@@ -11,10 +11,7 @@ globalVariables(c(
 
 server <- function(input, output) {
 
-  combined_dataset <- NULL
-  utils::data("combined_dataset",
-              package = "StockRecruitmentModels",
-              envir = environment())
+  data("combined_dataset")
 
 
   # -----  FITTING MODEL ON PLOT ----- #
