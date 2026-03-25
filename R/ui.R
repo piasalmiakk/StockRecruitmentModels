@@ -17,7 +17,11 @@ ui <- bslib::page_sidebar(
               choices = c("Beverton & Holt","Ricker","Hockey Stick"),
               selected = "Beverton & Holt"),
   sliderInput(inputId = "year_range", label = "Year range",
-              min = 1950, max = 2025, value = c(1990,2025)),
+              min = 1940,
+              max = 2025,
+              value = c(1990,2025),
+              step = 1,
+              sep = ""),
     withMathJax(), # mathjax for proper formatting of equations
          uiOutput("model_equation"),
          uiOutput("model_description")),
