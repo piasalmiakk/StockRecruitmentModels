@@ -5,13 +5,13 @@
 
 
 globalVariables(c(
-  "data","combined_dataset","Recruitment", "species","Year","Recruitment_pred"
+  "combined_dataset","Recruitment", "species","Year","Recruitment_pred"
 ))
 
 
 server <- function(input, output) {
 
-  data("combined_dataset")
+  utils::data("combined_dataset")
 
 
   # -----  FITTING MODEL ON PLOT ----- #

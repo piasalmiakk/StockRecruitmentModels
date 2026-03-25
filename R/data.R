@@ -3,8 +3,7 @@
 #' A dataset containing SSB and Recruitment time series data for different
 #' species of Norwegian fish stock.
 #' @docType data
-#' @format ## "combined_dataset"
-#' A data frame with columns:
+#' @format and object of class \code{tbl_df} (tibble) with columns:
 #' \describe{
 #'   \item{SSB}{Spawning stock biomass}
 #'   \item{Recruitment}{Number of recruits}
