@@ -1,6 +1,6 @@
 #' @import shiny
 #' @import ggplot2
-#' @importFrom utils globalVariables data
+#' @importFrom utils globalVariables
 #' @importFrom rlang .data
 
 
@@ -11,7 +11,7 @@ globalVariables(c(
 
 server <- function(input, output) {
 
-  utils::data("combined_dataset")
+  utils::data("combined_dataset", package = "StockRecruitmentModels", envir = environment())
 
 
   # -----  FITTING MODEL ON PLOT ----- #

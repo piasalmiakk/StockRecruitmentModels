@@ -40,8 +40,12 @@ pak::pak("piasalmiakk/StockRecruitmentModels")
 
 The shiny app can be launched by running:
 
+
 ```{r example}
-StockRecruitmentModels::run_StockRecruitmentModels()
+library(StockRecruitmentModels)
+run_StockRecruitmentModels()
 ```
+
+You have to load it with library first. 
 
 22.03.2026
