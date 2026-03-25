@@ -1,6 +1,6 @@
 #' @import shiny
 #' @import ggplot2
-#' @importFrom utils globalVariables
+#' @importFrom utils globalVariables data
 #' @importFrom rlang .data
 
 

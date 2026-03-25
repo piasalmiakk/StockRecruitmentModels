@@ -28,12 +28,19 @@ pak::pak("piasalmiakk/StockRecruitmentModels")
 The shiny app can be launched by running:
 
 ``` r
+StockRecruitmentModels::run_StockRecruitmentModels()
+```
+
+<div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div>
+
+If you get an error of not finding dataset, run this:
+
+``` r
 library(StockRecruitmentModels)
+
 run_StockRecruitmentModels()
 ```
 
 <div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div>
 
-You have to load it with library first.
-
-22.03.2026
+25.03.2026
